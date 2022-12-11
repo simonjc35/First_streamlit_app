@@ -32,7 +32,6 @@ fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
 # write your own comment - what does this do? - uses panda data frame and builds a screeen table
 streamlit.dataframe(fruityvice_normalized)
 
-
 my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
 my_cur = my_cnx.cursor()
 # my_cur.execute("SELECT CURRENT_USER(), CURRENT_ACCOUNT(), CURRENT_REGION()")
@@ -41,4 +40,6 @@ my_data_rows = my_cur.fetchall()
 streamlit.header("The Fruit Load list Contains:")
 streamlit.dataframe(my_data_rows)
 
-
+# Allow the end user to add a fruit to the list
+add_my_fruit = streamlit.text_input('What fruit would you like to add?','jackfruit')
+streamlit.write('Thanks for adding ', add_my_fruit)
